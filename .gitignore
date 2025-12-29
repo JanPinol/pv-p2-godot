@@ -1,0 +1,27 @@
+# --- GODOT 4 ---
+.godot/
+.import/
+
+# Export presets (es poden regenerar)
+export_presets.cfg
+
+# --- WINDOWS ---
+Thumbs.db
+desktop.ini
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- LOGS ---
+logs/
+*.log
+
+# --- BUILDS / EXPORTS ---
+build/
+export/
+bin/
+*.exe
+*.pck
+*.zip

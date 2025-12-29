@@ -1,0 +1,10 @@
+# Normalitza finals de línia
+* text=auto eol=lf
+
+# Recursos de Godot com a text
+*.tscn text
+*.tres text
+*.gd text
+*.shader text
+*.cfg text
+*.import text
