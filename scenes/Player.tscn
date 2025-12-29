@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ioji5rylobdu"]
+[gd_scene load_steps=27 format=3 uid="uid://ioji5rylobdu"]
 
 [ext_resource type="Script" uid="uid://beqhlytbesgt6" path="res://scripts/player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cjeend7ssx6p0" path="res://sprites/NinjaDark/Idle.png" id="2_3li8b"]
@@ -119,7 +119,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -136,7 +136,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -153,7 +153,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -170,17 +170,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 4.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_v6fml")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
+size = Vector2(56, 60)
 
-[node name="Shadow" type="Node2D" parent="."]
-script = ExtResource("4_mdl7e")
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_v6fml")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
-animation = &"idle"
+animation = &"walk_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_mdl7e")
+
+[node name="Shadow" type="Node2D" parent="."]
+script = ExtResource("4_mdl7e")
+base_radius = 16.0
+y_offset = 30.0
