@@ -1,9 +1,26 @@
-[gd_scene load_steps=27 format=3 uid="uid://ioji5rylobdu"]
+[gd_scene load_steps=33 format=3 uid="uid://ioji5rylobdu"]
 
 [ext_resource type="Script" uid="uid://beqhlytbesgt6" path="res://scripts/player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cjeend7ssx6p0" path="res://sprites/NinjaDark/Idle.png" id="2_3li8b"]
+[ext_resource type="Texture2D" uid="uid://fstm2u4fd5m4" path="res://sprites/NinjaDark/Attack.png" id="2_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://cy67xadhi0htj" path="res://sprites/NinjaDark/Walk.png" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://d1it706dmd8mh" path="res://scripts/shadow.gd" id="4_mdl7e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viqgg"]
+atlas = ExtResource("2_qu4a1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgkxt"]
+atlas = ExtResource("2_qu4a1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsi7p"]
+atlas = ExtResource("2_qu4a1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jpwa"]
+atlas = ExtResource("2_qu4a1")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qu4a1"]
 atlas = ExtResource("2_3li8b")
@@ -87,6 +104,38 @@ region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p0vlq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viqgg")
+}],
+"loop": true,
+"name": &"attack_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgkxt")
+}],
+"loop": true,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsi7p")
+}],
+"loop": true,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jpwa")
+}],
+"loop": true,
+"name": &"attack_up",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qu4a1")
@@ -174,7 +223,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
-size = Vector2(56, 60)
+size = Vector2(43, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfeki"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_v6fml")
@@ -183,13 +234,22 @@ script = ExtResource("1_v6fml")
 texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
-animation = &"walk_up"
+animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(1.5, 5.5)
 shape = SubResource("RectangleShape2D_mdl7e")
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("4_mdl7e")
 base_radius = 16.0
 y_offset = 30.0
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_pfeki")
+disabled = true
