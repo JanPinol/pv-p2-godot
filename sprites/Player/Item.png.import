@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fstm2u4fd5m4"
-path="res://.godot/imported/Attack.png-5d7d3bb837fe23a1735f07dfa6bb6654.ctex"
+uid="uid://drcyjh44rtmkl"
+path="res://.godot/imported/Item.png-bbb5ca30bba83f03970843671696d04a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/NinjaDark/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-5d7d3bb837fe23a1735f07dfa6bb6654.ctex"]
+source_file="res://sprites/Player/Item.png"
+dest_files=["res://.godot/imported/Item.png-bbb5ca30bba83f03970843671696d04a.ctex"]
 
 [params]
 

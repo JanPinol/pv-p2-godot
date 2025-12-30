@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfleopv06mpcd"
-path="res://.godot/imported/Dead.png-7e2c426d0181a6091cc5f4f2ac917d14.ctex"
+uid="uid://fstm2u4fd5m4"
+path="res://.godot/imported/Attack.png-193fcf00c7a4dc0aeb90f5f0daa0a5c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/NinjaDark/Dead.png"
-dest_files=["res://.godot/imported/Dead.png-7e2c426d0181a6091cc5f4f2ac917d14.ctex"]
+source_file="res://sprites/Player/Attack.png"
+dest_files=["res://.godot/imported/Attack.png-193fcf00c7a4dc0aeb90f5f0daa0a5c6.ctex"]
 
 [params]
 

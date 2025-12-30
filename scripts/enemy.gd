@@ -10,10 +10,14 @@ var player: CharacterBody2D
 var _last_damage_time: float = 0.0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hp_bar = $HealthBar
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	health = max_health
+	hp_bar.setup(max_health)
+	hp_bar.set_value(health)
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -40,6 +44,7 @@ func _check_damage() -> void:
 
 func take_damage(amount: int) -> void:
 	health -= amount
+	hp_bar.set_value(health)
 	print("Enemy takes damage! Current health:", health)
 	if health <= 0:
 		die()

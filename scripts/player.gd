@@ -12,9 +12,13 @@ var _attack_dir: Vector2 = Vector2.DOWN
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
+@onready var hp_bar = $HealthBar
+
 
 func _ready() -> void:
 	health = max_health
+	hp_bar.setup(max_health)
+	hp_bar.set_value(health)
 	attack_shape.disabled = true
 
 func _physics_process(_delta: float) -> void:
@@ -94,6 +98,7 @@ func _apply_attack_damage() -> void:
 
 func damage(amount: int) -> void:
 	health -= amount
+	hp_bar.set_value(health)
 	print("Player takes damage! Current health:", health)
 	if health <= 0:
 		die()

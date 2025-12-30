@@ -9,6 +9,5 @@
 position = Vector2(543, 310)
 
 [node name="Enemy" parent="." instance=ExtResource("2_rvslj")]
-position = Vector2(155.75003, 47.509377)
+position = Vector2(421, 309)
 scale = Vector2(4, 4)
-speed = null

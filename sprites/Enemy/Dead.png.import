@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://itdecx2gk34t"
-path="res://.godot/imported/Faceset.png-e3a8c3c1453092b27546a5f48a2ded2f.ctex"
+uid="uid://cekfl43q8uewv"
+path="res://.godot/imported/Dead.png-c9930671714540b8c0e100010db2476d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/NinjaDark/Faceset.png"
-dest_files=["res://.godot/imported/Faceset.png-e3a8c3c1453092b27546a5f48a2ded2f.ctex"]
+source_file="res://sprites/Enemy/Dead.png"
+dest_files=["res://.godot/imported/Dead.png-c9930671714540b8c0e100010db2476d.ctex"]
 
 [params]
 
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
