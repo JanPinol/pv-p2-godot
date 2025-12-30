@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgcx27glbvu2f"]
+
+[ext_resource type="Script" uid="uid://b3bq3es0i7ui6" path="res://scripts/hit_effect.gd" id="1_df7el"]
+[ext_resource type="Texture2D" uid="uid://cgcdugb86esu6" path="res://sprites/Player/Smoke.png" id="2_761mu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pqqm"]
+atlas = ExtResource("2_761mu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1byvu"]
+atlas = ExtResource("2_761mu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wtx0"]
+atlas = ExtResource("2_761mu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2f6s"]
+atlas = ExtResource("2_761mu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cm0cd"]
+atlas = ExtResource("2_761mu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfwf2"]
+atlas = ExtResource("2_761mu")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8imtr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pqqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1byvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wtx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2f6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cm0cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfwf2")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}]
+
+[node name="HitEffect" type="Node2D"]
+script = ExtResource("1_df7el")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8imtr")
+animation = &"hit"
