@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://btomucn1e83u1"]
+
+[ext_resource type="Script" uid="uid://blerlqwhkmq4e" path="res://scripts/title_screen.gd" id="1_ch40n"]
+[ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="2_ch40n"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ch40n")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.003
+anchor_bottom = -0.003
+offset_top = 1.944
+offset_right = 1152.0
+offset_bottom = 649.944
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 35
+text = "NINJA    TOWN"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="CenterContainer/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+
+[node name="ControlsButton" type="Button" parent="CenterContainer/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "CONTROLS"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "EXIT"
+
+[node name="ControlsMenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Movement" type="Label" parent="CenterContainer/ControlsMenu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "MOVE:    WASD    /    ARROW    KEYS"
+
+[node name="Attack" type="Label" parent="CenterContainer/ControlsMenu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "ATTACK:    SPACE
+"
+
+[node name="BackButton" type="Button" parent="CenterContainer/ControlsMenu"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ch40n")
+theme_override_font_sizes/font_size = 30
+text = "BACK"
