@@ -11,3 +11,8 @@ position = Vector2(543, 310)
 [node name="Enemy" parent="." instance=ExtResource("2_rvslj")]
 position = Vector2(290, 309)
 scale = Vector2(4, 4)
+speed = null
+damage_amount = null
+damage_interval = null
+max_health = null
+death_remove_delay = null

@@ -1,9 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://cochjp8gj7mfv"]
+[gd_scene load_steps=25 format=3 uid="uid://cochjp8gj7mfv"]
 
 [ext_resource type="Texture2D" uid="uid://cul8fwdff6fsl" path="res://sprites/Enemy/Walk.png" id="1_3gvst"]
 [ext_resource type="Script" uid="uid://d0mj35gbfsf1d" path="res://scripts/enemy.gd" id="1_55jtl"]
 [ext_resource type="Script" uid="uid://d1it706dmd8mh" path="res://scripts/shadow.gd" id="2_mpr68"]
+[ext_resource type="Texture2D" uid="uid://cekfl43q8uewv" path="res://sprites/Enemy/Dead.png" id="3_5wwv6"]
 [ext_resource type="PackedScene" uid="uid://b3jcu8xeleot5" path="res://scenes/HealthBar.tscn" id="4_ft8do"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oq86d"]
+atlas = ExtResource("3_5wwv6")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55jtl"]
 atlas = ExtResource("1_3gvst")
@@ -71,6 +76,14 @@ region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oq86d"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oq86d")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_55jtl")
@@ -144,22 +157,21 @@ animations = [{
 size = Vector2(13, 13)
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
-collision_layer = 2
 script = ExtResource("1_55jtl")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_oq86d")
-animation = &"walk_down"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1.5)
-shape = SubResource("RectangleShape2D_55jtl")
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("2_mpr68")
 base_radius = 4.0
 y_offset = 8.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_oq86d")
+animation = &"dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_55jtl")
 
 [node name="HealthBar" parent="." instance=ExtResource("4_ft8do")]
 position = Vector2(-8, -11)

@@ -2,107 +2,128 @@ extends CharacterBody2D
 
 @export var speed: float = 250.0
 @export var max_health: int = 100
-@export var attack_damage: int = 25
-@export var attack_duration: float = 0.15
+@export var kunai_damage: int = 10
+@export var shoot_cooldown: float = 0.25
+@export var kunai_scene: PackedScene
+@export var attack_lock_time: float = 0.18
+@export var spawn_dist: float = 14.0
 
 var health: int
+var _is_dead: bool = false
 var _is_attacking: bool = false
-var _attack_dir: Vector2 = Vector2.DOWN
+var _last_shot_time: float = -9999.0
+var _facing_dir: Vector2 = Vector2.DOWN
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var attack_hitbox: Area2D = $AttackHitbox
-@onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
 @onready var hp_bar = $HealthBar
-
+@onready var col: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	health = max_health
 	hp_bar.setup(max_health)
 	hp_bar.set_value(health)
-	attack_shape.disabled = true
 
 func _physics_process(_delta: float) -> void:
-	var input_vector := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	velocity = Vector2.ZERO if _is_attacking else input_vector * speed
-	move_and_slide()
-
-	if Input.is_action_just_pressed("attack") and not _is_attacking:
-		_attack_dir = _get_attack_direction(input_vector)
-		_start_attack()
+	if _is_dead:
+		_stop_movement()
 		return
 
+	var input_vector: Vector2 = Vector2.ZERO
 	if not _is_attacking:
-		if input_vector == Vector2.ZERO:
-			anim.play("idle")
-		else:
-			_play_walk_animation(input_vector)
+		input_vector = _read_movement_input()
+		_update_facing_from_input(input_vector)
 
-func _get_attack_direction(input_vector: Vector2) -> Vector2:
+	_apply_movement(input_vector)
+
+	if Input.is_action_just_pressed("attack"):
+		_try_throw_kunai()
+
+	if _is_attacking:
+		return
+
+	_update_movement_animation(input_vector)
+
+func _read_movement_input() -> Vector2:
+	return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+
+func _update_facing_from_input(input_vector: Vector2) -> void:
+	if input_vector != Vector2.ZERO:
+		_facing_dir = _to_4dir(input_vector)
+
+func _apply_movement(input_vector: Vector2) -> void:
+	velocity = input_vector * speed
+	move_and_slide()
+
+func _stop_movement() -> void:
+	velocity = Vector2.ZERO
+	move_and_slide()
+
+func _update_movement_animation(input_vector: Vector2) -> void:
 	if input_vector == Vector2.ZERO:
-		return Vector2.DOWN
+		anim.play("idle")
+		return
+	anim.play("walk_" + _direction_suffix(_facing_dir))
 
-	if abs(input_vector.x) > abs(input_vector.y):
-		return Vector2.RIGHT if input_vector.x > 0.0 else Vector2.LEFT
-	else:
-		return Vector2.DOWN if input_vector.y > 0.0 else Vector2.UP
+func _try_throw_kunai() -> void:
+	if kunai_scene == null:
+		return
+	if _throw_on_cooldown():
+		return
 
-func _start_attack() -> void:
+	_last_shot_time = _time_now_seconds()
+	_start_attack_animation()
+
+	_spawn_kunai()
+
+	get_tree().create_timer(attack_lock_time).timeout.connect(_end_attack)
+
+func _throw_on_cooldown() -> bool:
+	return _time_now_seconds() - _last_shot_time < shoot_cooldown
+
+func _start_attack_animation() -> void:
 	_is_attacking = true
-	_play_attack_animation()
+	anim.play("attack_" + _direction_suffix(_facing_dir))
 
-	_position_attack_hitbox()
-	attack_shape.disabled = false
-
-	await get_tree().process_frame
-	_apply_attack_damage()
-
-	await get_tree().create_timer(attack_duration).timeout
-	attack_shape.disabled = true
+func _end_attack() -> void:
 	_is_attacking = false
 
-func _play_walk_animation(dir: Vector2) -> void:
-	if abs(dir.x) > abs(dir.y):
-		anim.play("walk_right" if dir.x > 0.0 else "walk_left")
-	else:
-		anim.play("walk_down" if dir.y > 0.0 else "walk_up")
+func _spawn_kunai() -> void:
+	var kunai = kunai_scene.instantiate()
+	get_tree().current_scene.add_child(kunai)
 
-func _play_attack_animation() -> void:
-	if _attack_dir == Vector2.RIGHT:
-		anim.play("attack_right")
-	elif _attack_dir == Vector2.LEFT:
-		anim.play("attack_left")
-	elif _attack_dir == Vector2.UP:
-		anim.play("attack_up")
-	else:
-		anim.play("attack_down")
+	kunai.global_position = global_position + _facing_dir * spawn_dist
+	kunai.setup(_facing_dir)
+	kunai.damage = kunai_damage
 
-func _position_attack_hitbox() -> void:
-	var offset := Vector2.ZERO
+func _to_4dir(v: Vector2) -> Vector2:
+	if abs(v.x) > abs(v.y):
+		return Vector2.RIGHT if v.x > 0.0 else Vector2.LEFT
+	return Vector2.DOWN if v.y > 0.0 else Vector2.UP
 
-	if _attack_dir == Vector2.RIGHT:
-		offset = Vector2(38, 0)
-	elif _attack_dir == Vector2.LEFT:
-		offset = Vector2(-38, 0)
-	elif _attack_dir == Vector2.UP:
-		offset = Vector2(0, -38)
-	else:
-		offset = Vector2(0, 38)
+func _direction_suffix(dir: Vector2) -> String:
+	if dir == Vector2.RIGHT:
+		return "right"
+	if dir == Vector2.LEFT:
+		return "left"
+	if dir == Vector2.UP:
+		return "up"
+	return "down"
 
-	attack_hitbox.position = offset
-
-func _apply_attack_damage() -> void:
-	for area in attack_hitbox.get_overlapping_areas():
-		if area.is_in_group("enemies") and area.has_method("take_damage"):
-			area.take_damage(attack_damage)
+func _time_now_seconds() -> float:
+	return Time.get_ticks_msec() / 1000.0
 
 func damage(amount: int) -> void:
+	if _is_dead:
+		return
+
 	health -= amount
 	hp_bar.set_value(health)
-	print("Player takes damage! Current health:", health)
+
 	if health <= 0:
 		die()
 
 func die() -> void:
-	print("Player died.")
-	queue_free()
+	_is_dead = true
+	anim.play("dead")
+	col.set_deferred("disabled", true)
+	hp_bar.visible = false
