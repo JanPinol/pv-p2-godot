@@ -11,14 +11,18 @@ extends Control
 @onready var back_button: Button = $CenterContainer/ControlsMenu/BackButton
 
 func _ready() -> void:
+	AudioManager.play_title_music()
 	play_button.pressed.connect(_on_play_pressed)
 	controls_button.pressed.connect(_on_controls_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 
 func _on_play_pressed() -> void:
-	if gameplay_scene == null:
-		gameplay_scene = load("res://scenes/Main.tscn") as PackedScene
+	AudioManager.stop_music()
+	AudioManager.play_play_click()
+	gameplay_scene = load("res://scenes/Main.tscn") as PackedScene
+	await get_tree().create_timer(1).timeout
+	AudioManager.play_dungeon_music()
 	get_tree().change_scene_to_packed(gameplay_scene)
 
 func _on_controls_pressed() -> void:

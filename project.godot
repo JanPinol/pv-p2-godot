@@ -15,6 +15,10 @@ run/main_scene="uid://btomucn1e83u1"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+AudioManager="*res://scripts/audio_manager.gd"
+
 [global_group]
 
 enemies=""

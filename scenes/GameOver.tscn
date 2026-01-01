@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://b60menpp77yif"]
+
+[ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="1_6bcno"]
+[ext_resource type="Script" uid="uid://b0ouavrcdp7s1" path="res://scripts/game_over.gd" id="1_qae0b"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qae0b")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6bcno")
+theme_override_font_sizes/font_size = 35
+text = "GAME     OVER"
+
+[node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6bcno")
+theme_override_font_sizes/font_size = 30
+text = "RETRY"
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6bcno")
+theme_override_font_sizes/font_size = 30
+text = "MAIN    MENU"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6bcno")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"

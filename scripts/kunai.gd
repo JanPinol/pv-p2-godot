@@ -32,7 +32,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	if not area.has_method("take_damage"):
 		return
-
+	AudioManager.play_impact()
 	_has_hit = true
 	_spawn_hit_effect(global_position + hit_effect_offset)
 	area.take_damage(damage)

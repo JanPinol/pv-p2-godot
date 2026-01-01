@@ -115,7 +115,8 @@ func _time_now_seconds() -> float:
 func damage(amount: int) -> void:
 	if _is_dead:
 		return
-
+		
+	AudioManager.play_hit()
 	health -= amount
 	hp_bar.set_value(health)
 
@@ -123,7 +124,18 @@ func damage(amount: int) -> void:
 		die()
 
 func die() -> void:
+	if _is_dead:
+		return
+
 	_is_dead = true
+	AudioManager.stop_music()
+	AudioManager.play_gameover()
+	anim.sprite_frames.set_animation_loop("dead", false)
 	anim.play("dead")
 	col.set_deferred("disabled", true)
 	hp_bar.visible = false
+
+	await anim.animation_finished
+	await AudioManager.sfx_player.finished
+
+	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
