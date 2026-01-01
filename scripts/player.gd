@@ -72,10 +72,11 @@ func _try_throw_kunai() -> void:
 
 	_last_shot_time = _time_now_seconds()
 	_start_attack_animation()
-
+	AudioManager.play_shoot()
 	_spawn_kunai()
 
 	get_tree().create_timer(attack_lock_time).timeout.connect(_end_attack)
+
 
 func _throw_on_cooldown() -> bool:
 	return _time_now_seconds() - _last_shot_time < shoot_cooldown

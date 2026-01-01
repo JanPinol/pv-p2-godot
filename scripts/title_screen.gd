@@ -4,7 +4,6 @@ extends Control
 
 @onready var main_menu: VBoxContainer = $CenterContainer/MainMenu
 @onready var controls_menu: VBoxContainer = $CenterContainer/ControlsMenu
-
 @onready var play_button: Button = $CenterContainer/MainMenu/PlayButton
 @onready var controls_button: Button = $CenterContainer/MainMenu/ControlsButton
 @onready var exit_button: Button = $CenterContainer/MainMenu/ExitButton

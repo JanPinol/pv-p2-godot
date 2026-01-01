@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfimbdauj2sry"]
+
+[ext_resource type="Script" uid="uid://b2ri5h33ec1h0" path="res://scripts/map_generator.gd" id="1_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://ioji5rylobdu" path="res://scenes/Player.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://cochjp8gj7mfv" path="res://scenes/Enemy.tscn" id="2_rvslj"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0bbpv")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("2_0bbpv")]
+position = Vector2(543, 310)
+
+[node name="Enemy" parent="." instance=ExtResource("2_rvslj")]
+position = Vector2(290, 309)
+scale = Vector2(4, 4)

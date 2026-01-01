@@ -7,6 +7,7 @@ var SFX_IMPACT   := preload("res://audio/kunai_impact.wav")
 var DUNGEON_MUSIC := preload("res://audio/dungeon.ogg")
 var SFX_HIT := preload("res://audio/hit.wav")
 var END_THEME := preload("res://audio/end_theme.ogg")
+var SFX_SHOOT := preload("res://audio/shoot.wav")
 
 var music_player: AudioStreamPlayer
 var sfx_player: AudioStreamPlayer
@@ -63,3 +64,6 @@ func play_play_click() -> void:
 	
 func play_end_theme() -> void:
 	_play_music(END_THEME, true)
+	
+func play_shoot() -> void:
+	play_sfx(SFX_SHOOT)
