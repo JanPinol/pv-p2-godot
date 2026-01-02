@@ -74,6 +74,8 @@ func die() -> void:
 
 	_is_dead = true
 	died.emit()
+	GameState.add_kill()
+
 
 	anim.play("dead")
 	hp_bar.visible = false

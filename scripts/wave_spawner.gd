@@ -81,9 +81,9 @@ func _spawn_enemy() -> void:
 
 func _random_tile_position() -> Vector2:
 	var cell: Vector2i = _cells[randi() % _cells.size()]
-	var local: Vector2 = _tilemap.map_to_local(cell)
-	local += _tilemap.tile_set.tile_size * 0.5
-	return _tilemap.to_global(local)
+	var world: Vector2 = _tilemap.to_global(_tilemap.map_to_local(cell))
+	return world
+
 
 func _on_enemy_died() -> void:
 	alive -= 1
@@ -94,4 +94,4 @@ func _on_enemy_died() -> void:
 func _update_wave_text() -> void:
 	if _label == null:
 		return
-	_label.text = "WAVE " + str(wave)
+	_label.text = "WAVE    " + str(wave)

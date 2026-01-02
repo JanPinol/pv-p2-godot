@@ -138,5 +138,6 @@ func die() -> void:
 
 	await anim.animation_finished
 	await AudioManager.sfx_player.finished
+	GameState.stop_run()
 
 	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")

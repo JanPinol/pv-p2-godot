@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfimbdauj2sry"]
+[gd_scene load_steps=9 format=3 uid="uid://bfimbdauj2sry"]
 
+[ext_resource type="Script" uid="uid://cg76brcef5yhi" path="res://scripts/hud_score.gd" id="1_c01mt"]
 [ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="1_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://ioji5rylobdu" path="res://scenes/Player.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cochjp8gj7mfv" path="res://scenes/Enemy.tscn" id="2_rvslj"]
@@ -90,18 +91,26 @@ sources/1 = SubResource("TileSetAtlasSource_rarhs")
 texture_filter = 1
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_c01mt")
+score_label_path = NodePath("ScoreLabel")
 
 [node name="WaveLabel" type="Label" parent="HUD"]
 texture_filter = 1
-offset_left = 2.0
-offset_top = -1.0
-offset_right = 196.0
-offset_bottom = 69.0
+offset_left = 8.0
+offset_right = 207.0
+offset_bottom = 47.0
 theme_override_fonts/font = ExtResource("1_vcsgt")
 theme_override_font_sizes/font_size = 35
 text = "WAVE    1"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 709.0
+offset_right = 1152.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("1_vcsgt")
+theme_override_font_sizes/font_size = 35
+text = "KILLS:    0        BEST:    0"
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
