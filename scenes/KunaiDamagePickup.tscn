@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://rs7moujro2ic"]
+
+[ext_resource type="Texture2D" uid="uid://cbwmsm6syxvqb" path="res://sprites/Items/attack_upgrade.png" id="1_pvhr7"]
+[ext_resource type="Script" uid="uid://x4megd4lcp47" path="res://scripts/kunai_damage_pickup.gd" id="1_shped"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvhr7"]
+size = Vector2(24, 24)
+
+[node name="KunaiDamagePickup" type="Area2D"]
+script = ExtResource("1_shped")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_pvhr7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pvhr7")

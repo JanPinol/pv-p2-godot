@@ -6,8 +6,8 @@ extends Area2D
 @export var hit_effect_scene: PackedScene
 @export var hit_effect_offset: Vector2 = Vector2.ZERO
 
+var piercing: int = 0
 var _direction: Vector2 = Vector2.DOWN
-var _has_hit: bool = false
 
 func setup(direction: Vector2) -> void:
 	_set_direction(direction)
@@ -26,17 +26,19 @@ func _set_direction(direction: Vector2) -> void:
 	rotation = _direction.angle()
 
 func _on_area_entered(area: Area2D) -> void:
-	if _has_hit:
-		return
 	if not area.is_in_group("enemies"):
 		return
 	if not area.has_method("take_damage"):
 		return
+
 	AudioManager.play_impact()
-	_has_hit = true
 	_spawn_hit_effect(global_position + hit_effect_offset)
 	area.take_damage(damage)
-	queue_free()
+
+	if piercing > 0:
+		piercing -= 1
+	else:
+		queue_free()
 
 func _spawn_hit_effect(pos: Vector2) -> void:
 	if hit_effect_scene == null:

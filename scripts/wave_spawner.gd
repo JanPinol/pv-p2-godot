@@ -4,7 +4,7 @@ extends Node2D
 @export var tilemap_path: NodePath
 @export var tilemap_layer: int = 0
 @export var wave_label_path: NodePath
-@export var entities_path: NodePath
+@export var world_path: NodePath
 
 @export var time_between_waves: float = 1.25
 
@@ -14,7 +14,7 @@ var alive: int = 0
 var _label: Label
 var _tilemap: TileMap
 var _cells: Array[Vector2i] = []
-var _entities: Node
+var _world: Node
 
 var _fib_a: int = 1
 var _fib_b: int = 1
@@ -23,7 +23,7 @@ func _ready() -> void:
 	randomize()
 	_label = get_node_or_null(wave_label_path) as Label
 	_tilemap = get_node_or_null(tilemap_path) as TileMap
-	_entities = get_node_or_null(entities_path)
+	_world = get_node_or_null(world_path)
 
 	if _tilemap != null:
 		var layers_count := _tilemap.get_layers_count()
@@ -67,8 +67,9 @@ func _spawn_enemy() -> void:
 	var pos: Vector2 = _random_tile_position()
 
 	var e := enemy_scene.instantiate()
-	if _entities != null:
-		_entities.call_deferred("add_child", e)
+
+	if _world != null:
+		_world.call_deferred("add_child", e)
 	else:
 		get_tree().current_scene.call_deferred("add_child", e)
 
@@ -81,9 +82,7 @@ func _spawn_enemy() -> void:
 
 func _random_tile_position() -> Vector2:
 	var cell: Vector2i = _cells[randi() % _cells.size()]
-	var world: Vector2 = _tilemap.to_global(_tilemap.map_to_local(cell))
-	return world
-
+	return _tilemap.to_global(_tilemap.map_to_local(cell))
 
 func _on_enemy_died() -> void:
 	alive -= 1

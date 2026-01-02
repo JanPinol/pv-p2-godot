@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://irv8qfy7lxo0"]
+
+[ext_resource type="Script" uid="uid://rtxsrtpm281a" path="res://scripts/kunai_multi_pickup.gd" id="1_cv7qj"]
+[ext_resource type="Texture2D" uid="uid://proit5rekvah" path="res://sprites/Items/multiple_upgrade.png" id="2_diru3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrptl"]
+size = Vector2(24, 24)
+
+[node name="KunaiMultiPickup" type="Area2D"]
+script = ExtResource("1_cv7qj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_diru3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mrptl")

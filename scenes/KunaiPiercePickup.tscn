@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp0rcfbk44cdb"]
+
+[ext_resource type="Script" uid="uid://cjydn6mj6h3ek" path="res://scripts/kunai_pierce_pickup.gd" id="1_3m70x"]
+[ext_resource type="Texture2D" uid="uid://cxbpj7hccja5u" path="res://sprites/Items/piercing_upgrade.png" id="1_uhq8d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhq8d"]
+size = Vector2(24, 24)
+
+[node name="KunaiPiercePickup" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_3m70x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_uhq8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uhq8d")

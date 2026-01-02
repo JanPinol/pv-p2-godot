@@ -21,6 +21,10 @@ var _facing_dir: Vector2 = Vector2.DOWN
 var _invuln_until: float = -9999.0
 var _knock_vel: Vector2 = Vector2.ZERO
 
+var kunai_count: int = 1
+var kunai_piercing: int = 0
+var kunai_damage_bonus: int = 0
+
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hp_bar = $HealthBar
 @onready var col: CollisionShape2D = $CollisionShape2D
@@ -81,7 +85,7 @@ func _try_throw_kunai() -> void:
 	_last_shot_time = _time_now_seconds()
 	_start_attack_animation()
 	AudioManager.play_shoot()
-	_spawn_kunai()
+	_spawn_kunai_burst()
 
 	get_tree().create_timer(attack_lock_time).timeout.connect(_end_attack)
 
@@ -95,13 +99,30 @@ func _start_attack_animation() -> void:
 func _end_attack() -> void:
 	_is_attacking = false
 
-func _spawn_kunai() -> void:
-	var kunai = kunai_scene.instantiate()
-	get_tree().current_scene.add_child(kunai)
+func _spawn_kunai_burst() -> void:
+	var count: int = max(1, int(kunai_count))
+	var min_total: float = 0.0
+	var max_total: float = 0.75
+	var total_angle: float = clamp(0.15 * float(count - 1), min_total, max_total)
 
-	kunai.global_position = global_position + _facing_dir * spawn_dist
-	kunai.setup(_facing_dir)
-	kunai.damage = kunai_damage
+	if count == 1:
+		_spawn_one_kunai(_facing_dir)
+		return
+
+	for i in range(count):
+		var t: float = float(i) / float(count - 1)
+		var angle_offset: float = lerp(-total_angle * 0.5, total_angle * 0.5, t)
+		_spawn_one_kunai(_facing_dir.rotated(angle_offset))
+
+func _spawn_one_kunai(dir: Vector2) -> void:
+	var k = kunai_scene.instantiate()
+	get_tree().current_scene.add_child(k)
+
+	k.global_position = global_position + dir * spawn_dist
+	k.setup(dir)
+	k.damage = kunai_damage + kunai_damage_bonus
+	k.piercing = kunai_piercing
+
 
 func _to_4dir(v: Vector2) -> Vector2:
 	if abs(v.x) > abs(v.y):
@@ -119,6 +140,21 @@ func _direction_suffix(dir: Vector2) -> String:
 
 func _time_now_seconds() -> float:
 	return Time.get_ticks_msec() / 1000.0
+
+func heal(amount: int) -> void:
+	if _is_dead:
+		return
+	health = min(max_health, health + amount)
+	hp_bar.set_value(health)
+
+func add_kunai_count(amount: int) -> void:
+	kunai_count += amount
+
+func add_kunai_piercing(amount: int) -> void:
+	kunai_piercing += amount
+
+func add_kunai_damage(amount: int) -> void:
+	kunai_damage_bonus += amount
 
 func damage(amount: int) -> void:
 	hit(amount, Vector2.ZERO)
@@ -167,9 +203,3 @@ func die() -> void:
 	await AudioManager.sfx_player.finished
 
 	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
-	
-func heal(amount: int) -> void:
-	if _is_dead:
-		return
-	health = min(max_health, health + amount)
-	hp_bar.set_value(health)

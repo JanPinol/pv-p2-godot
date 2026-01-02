@@ -9,7 +9,7 @@ var SFX_HIT := preload("res://audio/hit.wav")
 var END_THEME := preload("res://audio/end_theme.ogg")
 var SFX_SHOOT := preload("res://audio/shoot.wav")
 var HEAL := preload("res://audio/heal.wav")
-
+var POWERUP := preload("res://audio/power_up.wav")
 
 var music_player: AudioStreamPlayer
 var sfx_player: AudioStreamPlayer
@@ -72,3 +72,6 @@ func play_shoot() -> void:
 	
 func play_heal() -> void:
 	play_sfx(HEAL)
+
+func play_powerup() -> void:
+	play_sfx(POWERUP)

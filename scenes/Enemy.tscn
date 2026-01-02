@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cochjp8gj7mfv"]
+[gd_scene load_steps=34 format=3 uid="uid://cochjp8gj7mfv"]
 
 [ext_resource type="Texture2D" uid="uid://cul8fwdff6fsl" path="res://sprites/Enemy/Walk.png" id="1_3gvst"]
 [ext_resource type="Script" uid="uid://d0mj35gbfsf1d" path="res://scripts/enemy.gd" id="1_55jtl"]
@@ -6,12 +6,30 @@
 [ext_resource type="Script" uid="uid://d1it706dmd8mh" path="res://scripts/shadow.gd" id="2_mpr68"]
 [ext_resource type="Texture2D" uid="uid://cekfl43q8uewv" path="res://sprites/Enemy/Dead.png" id="3_5wwv6"]
 [ext_resource type="PackedScene" uid="uid://cc8jaodj0qcat" path="res://scenes/HealPickup.tscn" id="3_iwav8"]
+[ext_resource type="PackedScene" uid="uid://rs7moujro2ic" path="res://scenes/KunaiDamagePickup.tscn" id="4_82o86"]
 [ext_resource type="PackedScene" uid="uid://b3jcu8xeleot5" path="res://scenes/HealthBar.tscn" id="4_ft8do"]
+[ext_resource type="PackedScene" uid="uid://irv8qfy7lxo0" path="res://scenes/KunaiMultiPickup.tscn" id="5_1gqeq"]
+[ext_resource type="PackedScene" uid="uid://dp0rcfbk44cdb" path="res://scenes/KunaiPiercePickup.tscn" id="6_isvm2"]
 
 [sub_resource type="Resource" id="Resource_iwav8"]
 script = ExtResource("2_1vja8")
 scene = ExtResource("3_iwav8")
 weight = 50.0
+metadata/_custom_type_script = "uid://cddj5ddvy6a4m"
+
+[sub_resource type="Resource" id="Resource_gr8dl"]
+script = ExtResource("2_1vja8")
+scene = ExtResource("4_82o86")
+metadata/_custom_type_script = "uid://cddj5ddvy6a4m"
+
+[sub_resource type="Resource" id="Resource_axa8o"]
+script = ExtResource("2_1vja8")
+scene = ExtResource("5_1gqeq")
+metadata/_custom_type_script = "uid://cddj5ddvy6a4m"
+
+[sub_resource type="Resource" id="Resource_4iqch"]
+script = ExtResource("2_1vja8")
+scene = ExtResource("6_isvm2")
 metadata/_custom_type_script = "uid://cddj5ddvy6a4m"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oq86d"]
@@ -167,7 +185,7 @@ size = Vector2(13, 13)
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 scale = Vector2(4, 4)
 script = ExtResource("1_55jtl")
-loot_table = Array[ExtResource("2_1vja8")]([SubResource("Resource_iwav8")])
+loot_table = Array[ExtResource("2_1vja8")]([SubResource("Resource_iwav8"), SubResource("Resource_gr8dl"), SubResource("Resource_axa8o"), SubResource("Resource_4iqch")])
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("2_mpr68")
