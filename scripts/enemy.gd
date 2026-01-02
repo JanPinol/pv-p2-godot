@@ -1,5 +1,7 @@
 extends Area2D
 
+signal died
+
 @export var speed: float = 80.0
 @export var damage_amount: int = 10
 @export var damage_interval: float = 0.6
@@ -71,6 +73,8 @@ func die() -> void:
 		return
 
 	_is_dead = true
+	died.emit()
+
 	anim.play("dead")
 	hp_bar.visible = false
 
@@ -80,6 +84,7 @@ func die() -> void:
 
 	await get_tree().create_timer(death_remove_delay).timeout
 	queue_free()
+
 
 func _play_walk_animation(dir: Vector2) -> void:
 	anim.play("walk_" + _direction_suffix(dir))

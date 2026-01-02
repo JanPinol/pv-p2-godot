@@ -92,7 +92,6 @@ texture_filter = 1
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="WaveLabel" type="Label" parent="HUD"]
-texture_filter = 1
 offset_left = 2.0
 offset_top = -1.0
 offset_right = 196.0
@@ -113,12 +112,11 @@ layer_0/tile_data = PackedInt32Array(131073, 65537, 7, 196609, 65537, 7, 262145,
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("4_rarhs")
 enemy_scene = ExtResource("2_rvslj")
-tilemap_path = NodePath("../TileMap")
+spawn_points = Array[NodePath]([NodePath("../TileMap")])
 wave_label_path = NodePath("../HUD/WaveLabel")
-entities_path = NodePath("../Entities")
+base_enemies = null
+enemies_per_wave = null
+time_between_waves = null
 
-[node name="Entities" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Player" parent="Entities" instance=ExtResource("2_0bbpv")]
+[node name="Player" parent="." instance=ExtResource("2_0bbpv")]
 position = Vector2(543, 310)

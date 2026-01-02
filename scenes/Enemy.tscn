@@ -157,6 +157,7 @@ animations = [{
 size = Vector2(13, 13)
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
+scale = Vector2(4, 4)
 script = ExtResource("1_55jtl")
 
 [node name="Shadow" type="Node2D" parent="."]
