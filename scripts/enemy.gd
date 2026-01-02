@@ -8,8 +8,10 @@ signal died
 @export var max_health: int = 50
 @export var death_remove_delay: float = 0.6
 @export var stop_distance: float = 1.0
-
 @export var player_knockback: float = 420.0
+@export var loot_table: Array[LootEntry] = []
+@export var drop_offset: Vector2 = Vector2.ZERO
+@export_range(0.0, 100.0, 0.1) var no_drop_weight: float = 70.0
 
 var health: int
 var player: CharacterBody2D = null
@@ -82,7 +84,7 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	if _is_dead:
 		return
-
+		
 	_is_dead = true
 	died.emit()
 
@@ -95,8 +97,9 @@ func die() -> void:
 	col.set_deferred("disabled", true)
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
-
+	
 	await get_tree().create_timer(death_remove_delay).timeout
+	_try_drop_loot()
 	queue_free()
 
 func _play_walk_animation(dir: Vector2) -> void:
@@ -106,3 +109,48 @@ func _direction_suffix(dir: Vector2) -> String:
 	if abs(dir.x) > abs(dir.y):
 		return "right" if dir.x > 0.0 else "left"
 	return "down" if dir.y > 0.0 else "up"
+
+func _try_drop_loot() -> void:
+	var entry := _roll_loot_entry()
+	if entry == null:
+		return
+	if entry.scene == null:
+		return
+
+	var item := entry.scene.instantiate()
+	get_tree().current_scene.add_child(item)
+	item.global_position = global_position + drop_offset
+
+func _roll_loot_entry() -> LootEntry:
+	var total: float = max(0.0, no_drop_weight)
+
+	for e in loot_table:
+		if e == null:
+			continue
+		if e.scene == null:
+			continue
+		if e.weight <= 0.0:
+			continue
+		total += e.weight
+
+	if total <= 0.0:
+		return null
+
+	var r := randf() * total
+	var acc: float = max(0.0, no_drop_weight)
+
+	if r <= acc:
+		return null
+
+	for e in loot_table:
+		if e == null:
+			continue
+		if e.scene == null:
+			continue
+		if e.weight <= 0.0:
+			continue
+		acc += e.weight
+		if r <= acc:
+			return e
+
+	return null

@@ -167,3 +167,9 @@ func die() -> void:
 	await AudioManager.sfx_player.finished
 
 	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+	
+func heal(amount: int) -> void:
+	if _is_dead:
+		return
+	health = min(max_health, health + amount)
+	hp_bar.set_value(health)

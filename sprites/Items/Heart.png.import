@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6efdyodi25oc"
-path="res://.godot/imported/TilesetField.png-fa7016de67f8c263f775b073138f3919.ctex"
+uid="uid://bcnle3d2it4gb"
+path="res://.godot/imported/Heart.png-77b2f15f4c8189056dc9a6daf3fc2866.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/TilesetField.png"
-dest_files=["res://.godot/imported/TilesetField.png-fa7016de67f8c263f775b073138f3919.ctex"]
+source_file="res://sprites/Items/Heart.png"
+dest_files=["res://.godot/imported/Heart.png-77b2f15f4c8189056dc9a6daf3fc2866.ctex"]
 
 [params]
 

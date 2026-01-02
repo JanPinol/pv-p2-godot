@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="1_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://ioji5rylobdu" path="res://scenes/Player.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cochjp8gj7mfv" path="res://scenes/Enemy.tscn" id="2_rvslj"]
-[ext_resource type="Texture2D" uid="uid://6efdyodi25oc" path="res://sprites/TilesetField.png" id="3_c01mt"]
+[ext_resource type="Texture2D" uid="uid://6efdyodi25oc" path="res://sprites/Map/TilesetField.png" id="3_c01mt"]
 [ext_resource type="Script" uid="uid://c6hgtkta5dvqy" path="res://scripts/wave_spawner.gd" id="4_rarhs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rarhs"]

@@ -1,10 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://cochjp8gj7mfv"]
+[gd_scene load_steps=28 format=3 uid="uid://cochjp8gj7mfv"]
 
 [ext_resource type="Texture2D" uid="uid://cul8fwdff6fsl" path="res://sprites/Enemy/Walk.png" id="1_3gvst"]
 [ext_resource type="Script" uid="uid://d0mj35gbfsf1d" path="res://scripts/enemy.gd" id="1_55jtl"]
+[ext_resource type="Script" uid="uid://cddj5ddvy6a4m" path="res://scripts/loot_entry.gd" id="2_1vja8"]
 [ext_resource type="Script" uid="uid://d1it706dmd8mh" path="res://scripts/shadow.gd" id="2_mpr68"]
 [ext_resource type="Texture2D" uid="uid://cekfl43q8uewv" path="res://sprites/Enemy/Dead.png" id="3_5wwv6"]
+[ext_resource type="PackedScene" uid="uid://cc8jaodj0qcat" path="res://scenes/HealPickup.tscn" id="3_iwav8"]
 [ext_resource type="PackedScene" uid="uid://b3jcu8xeleot5" path="res://scenes/HealthBar.tscn" id="4_ft8do"]
+
+[sub_resource type="Resource" id="Resource_iwav8"]
+script = ExtResource("2_1vja8")
+scene = ExtResource("3_iwav8")
+weight = 50.0
+metadata/_custom_type_script = "uid://cddj5ddvy6a4m"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oq86d"]
 atlas = ExtResource("3_5wwv6")
@@ -159,6 +167,7 @@ size = Vector2(13, 13)
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 scale = Vector2(4, 4)
 script = ExtResource("1_55jtl")
+loot_table = Array[ExtResource("2_1vja8")]([SubResource("Resource_iwav8")])
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("2_mpr68")

@@ -8,6 +8,8 @@ var DUNGEON_MUSIC := preload("res://audio/dungeon.ogg")
 var SFX_HIT := preload("res://audio/hit.wav")
 var END_THEME := preload("res://audio/end_theme.ogg")
 var SFX_SHOOT := preload("res://audio/shoot.wav")
+var HEAL := preload("res://audio/heal.wav")
+
 
 var music_player: AudioStreamPlayer
 var sfx_player: AudioStreamPlayer
@@ -67,3 +69,6 @@ func play_end_theme() -> void:
 	
 func play_shoot() -> void:
 	play_sfx(SFX_SHOOT)
+	
+func play_heal() -> void:
+	play_sfx(HEAL)
