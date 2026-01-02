@@ -9,6 +9,8 @@ signal died
 @export var death_remove_delay: float = 0.6
 @export var stop_distance: float = 1.0
 
+@export var player_knockback: float = 420.0
+
 var health: int
 var player: CharacterBody2D = null
 var _is_dead: bool = false
@@ -48,8 +50,17 @@ func _try_damage_player() -> void:
 
 	for body in get_overlapping_bodies():
 		if body.is_in_group("player"):
-			body.damage(damage_amount)
-			_last_damage_time = _time_now_seconds()
+			var dir := (body.global_position - global_position).normalized()
+			var applied := false
+
+			if body.has_method("hit"):
+				applied = body.hit(damage_amount, dir) if body.hit is Callable else false
+			elif body.has_method("damage"):
+				body.damage(damage_amount)
+				applied = true
+
+			if applied:
+				_last_damage_time = _time_now_seconds()
 			return
 
 func _damage_on_cooldown() -> bool:
@@ -74,8 +85,9 @@ func die() -> void:
 
 	_is_dead = true
 	died.emit()
-	GameState.add_kill()
 
+	if get_node_or_null("/root/GameState") != null:
+		GameState.add_kill()
 
 	anim.play("dead")
 	hp_bar.visible = false
@@ -86,7 +98,6 @@ func die() -> void:
 
 	await get_tree().create_timer(death_remove_delay).timeout
 	queue_free()
-
 
 func _play_walk_animation(dir: Vector2) -> void:
 	anim.play("walk_" + _direction_suffix(dir))
