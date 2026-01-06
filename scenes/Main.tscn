@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfimbdauj2sry"]
+[gd_scene load_steps=14 format=3 uid="uid://bfimbdauj2sry"]
 
 [ext_resource type="Script" uid="uid://cg76brcef5yhi" path="res://scripts/hud_score.gd" id="1_c01mt"]
 [ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="1_vcsgt"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://rs7moujro2ic" path="res://scenes/KunaiDamagePickup.tscn" id="6_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://irv8qfy7lxo0" path="res://scenes/KunaiMultiPickup.tscn" id="7_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dp0rcfbk44cdb" path="res://scenes/KunaiPiercePickup.tscn" id="8_qmy6f"]
+[ext_resource type="PackedScene" uid="uid://b8y72s1ap1n64" path="res://scenes/Boss.tscn" id="9_wp0k4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rarhs"]
 texture = ExtResource("3_c01mt")
@@ -104,6 +105,7 @@ layer_0/tile_data = PackedInt32Array(131073, 65537, 7, 196609, 65537, 7, 262145,
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("4_rarhs")
 enemy_scene = ExtResource("2_rvslj")
+boss_scene = ExtResource("9_wp0k4")
 tilemap_path = NodePath("../TileMap")
 wave_label_path = NodePath("../HUD/WaveLabel")
 world_path = NodePath("../World")

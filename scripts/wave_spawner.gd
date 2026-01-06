@@ -1,11 +1,11 @@
 extends Node2D
 
 @export var enemy_scene: PackedScene
+@export var boss_scene: PackedScene
 @export var tilemap_path: NodePath
 @export var tilemap_layer: int = 0
 @export var wave_label_path: NodePath
 @export var world_path: NodePath
-
 @export var time_between_waves: float = 1.25
 
 var wave: int = 0
@@ -37,6 +37,11 @@ func _start_next_wave() -> void:
 	wave += 1
 	_update_wave_text()
 
+	if wave == 10 and boss_scene != null:
+		alive = 0
+		_spawn_boss()
+		return
+
 	var to_spawn := _next_fib_count()
 	alive = 0
 
@@ -65,7 +70,6 @@ func _spawn_enemy() -> void:
 		return
 
 	var pos: Vector2 = _random_tile_position()
-
 	var e := enemy_scene.instantiate()
 
 	if _world != null:
@@ -79,6 +83,25 @@ func _spawn_enemy() -> void:
 		e.died.connect(_on_enemy_died)
 
 	alive += 1
+
+func _spawn_boss() -> void:
+	if boss_scene == null:
+		return
+
+	var b := boss_scene.instantiate()
+
+	if _world != null:
+		_world.call_deferred("add_child", b)
+	else:
+		get_tree().current_scene.call_deferred("add_child", b)
+
+	b.global_position = Vector2(548, 115)
+
+	if b.has_signal("died"):
+		b.died.connect(_on_enemy_died)
+
+	alive += 1
+
 
 func _random_tile_position() -> Vector2:
 	var cell: Vector2i = _cells[randi() % _cells.size()]
