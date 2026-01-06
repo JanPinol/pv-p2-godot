@@ -183,6 +183,7 @@ animations = [{
 size = Vector2(13, 13)
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
+z_index = 5
 scale = Vector2(4, 4)
 script = ExtResource("1_55jtl")
 loot_table = Array[ExtResource("2_1vja8")]([SubResource("Resource_iwav8"), SubResource("Resource_gr8dl"), SubResource("Resource_axa8o"), SubResource("Resource_4iqch")])

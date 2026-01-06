@@ -241,9 +241,9 @@ animations = [{
 size = Vector2(43, 37)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
 script = ExtResource("1_v6fml")
 speed = 400.0
-kunai_damage = 10
 kunai_scene = ExtResource("8_khinc")
 
 [node name="Shadow" type="Node2D" parent="."]

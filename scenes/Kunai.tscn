@@ -10,6 +10,7 @@ size = Vector2(14, 6)
 [node name="Kunai" type="Area2D"]
 light_mask = 4
 visibility_layer = 2
+z_index = 5
 texture_filter = 1
 scale = Vector2(4, 4)
 script = ExtResource("1_7l1d7")

@@ -1,15 +1,16 @@
-[gd_scene load_steps=37 format=3 uid="uid://b8y72s1ap1n64"]
+[gd_scene load_steps=38 format=3 uid="uid://b8y72s1ap1n64"]
 
 [ext_resource type="Script" uid="uid://b7r3bcny12k4h" path="res://scripts/boss.gd" id="1_85kei"]
 [ext_resource type="Texture2D" uid="uid://uj5aef8375wo" path="res://sprites/Boss/AttackLeft.png" id="1_pfyq2"]
+[ext_resource type="PackedScene" uid="uid://derhup1xnteu8" path="res://scenes/BossStrikeArea.tscn" id="2_2r62o"]
 [ext_resource type="Texture2D" uid="uid://dq7do08bpj7by" path="res://sprites/Boss/AttackRight.png" id="2_85kei"]
-[ext_resource type="PackedScene" uid="uid://fm26wsphycum" path="res://scenes/AttackZone.tscn" id="2_gfnkn"]
 [ext_resource type="Texture2D" uid="uid://b6l8qdm5d8nwg" path="res://sprites/Boss/ChargeLeft.png" id="3_kitqk"]
 [ext_resource type="Texture2D" uid="uid://du33xfjgm55mf" path="res://sprites/Boss/ChargeRight.png" id="4_gfnkn"]
 [ext_resource type="Texture2D" uid="uid://diwsfj0ej6d1o" path="res://sprites/Boss/Hit.png" id="5_2r62o"]
 [ext_resource type="Texture2D" uid="uid://bljcmsunqapux" path="res://sprites/Boss/Idle.png" id="6_ncbpu"]
 [ext_resource type="PackedScene" uid="uid://b3jcu8xeleot5" path="res://scenes/HealthBar.tscn" id="7_c56gl"]
 [ext_resource type="Script" uid="uid://d1it706dmd8mh" path="res://scripts/shadow.gd" id="9_kitqk"]
+[ext_resource type="PackedScene" uid="uid://bnxwspng2sggp" path="res://scenes/BossLaser.tscn" id="10_gfnkn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhtao"]
 atlas = ExtResource("1_pfyq2")
@@ -216,18 +217,11 @@ animations = [{
 size = Vector2(43, 36)
 
 [node name="Boss" type="Area2D" groups=["enemies"]]
-z_index = 5
-y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(4, 4)
 script = ExtResource("1_85kei")
 max_health = 10000
-damage = 10
-attack_interval_min = 0.3
-zones_per_attack_min = 15
-zones_per_attack_max = 50
-zone_size_max = Vector2(200, 200)
-attack_zone_scene = ExtResource("2_gfnkn")
+strike_area_scene = ExtResource("2_2r62o")
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("9_kitqk")
@@ -243,3 +237,7 @@ shape = SubResource("RectangleShape2D_pfyq2")
 
 [node name="HealthBar" parent="." instance=ExtResource("7_c56gl")]
 position = Vector2(-9, -24)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="BossLaser" parent="." instance=ExtResource("10_gfnkn")]

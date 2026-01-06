@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b7r3bcny12k4h" path="res://scripts/boss.gd" id="1_85kei"]
 [ext_resource type="Texture2D" uid="uid://uj5aef8375wo" path="res://sprites/Boss/AttackLeft.png" id="1_pfyq2"]
+[ext_resource type="PackedScene" uid="uid://derhup1xnteu8" path="res://scenes/BossStrikeArea.tscn" id="2_2r62o"]
 [ext_resource type="Texture2D" uid="uid://dq7do08bpj7by" path="res://sprites/Boss/AttackRight.png" id="2_85kei"]
-[ext_resource type="PackedScene" uid="uid://fm26wsphycum" path="res://scenes/AttackZone.tscn" id="2_gfnkn"]
 [ext_resource type="Texture2D" uid="uid://b6l8qdm5d8nwg" path="res://sprites/Boss/ChargeLeft.png" id="3_kitqk"]
 [ext_resource type="Texture2D" uid="uid://du33xfjgm55mf" path="res://sprites/Boss/ChargeRight.png" id="4_gfnkn"]
 [ext_resource type="Texture2D" uid="uid://diwsfj0ej6d1o" path="res://sprites/Boss/Hit.png" id="5_2r62o"]
@@ -216,18 +216,17 @@ animations = [{
 size = Vector2(43, 36)
 
 [node name="Boss" type="Area2D" groups=["enemies"]]
-z_index = 5
-y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(4, 4)
 script = ExtResource("1_85kei")
-max_health = 10000
-damage = 10
-attack_interval_min = 0.3
-zones_per_attack_min = 15
-zones_per_attack_max = 50
-zone_size_max = Vector2(200, 200)
-attack_zone_scene = ExtResource("2_gfnkn")
+max_health = null
+strike_area_scene = ExtResource("2_2r62o")
+attack_interval = 2.0
+first_attack_delay = null
+warn_time = null
+fire_time = null
+area_damage = null
+area_thickness = null
 
 [node name="Shadow" type="Node2D" parent="."]
 script = ExtResource("9_kitqk")
@@ -243,3 +242,5 @@ shape = SubResource("RectangleShape2D_pfyq2")
 
 [node name="HealthBar" parent="." instance=ExtResource("7_c56gl")]
 position = Vector2(-9, -24)
+
+[node name="Marker2D" type="Marker2D" parent="."]

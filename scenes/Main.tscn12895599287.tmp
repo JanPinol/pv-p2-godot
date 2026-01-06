@@ -1,0 +1,178 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfimbdauj2sry"]
+
+[ext_resource type="Script" uid="uid://cg76brcef5yhi" path="res://scripts/hud_score.gd" id="1_c01mt"]
+[ext_resource type="FontFile" uid="uid://xs1v1x7nq10x" path="res://sprites/UI/NormalFont.ttf" id="1_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://ioji5rylobdu" path="res://scenes/Player.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://cochjp8gj7mfv" path="res://scenes/Enemy.tscn" id="2_rvslj"]
+[ext_resource type="Texture2D" uid="uid://6efdyodi25oc" path="res://sprites/Map/TilesetField.png" id="3_c01mt"]
+[ext_resource type="Script" uid="uid://c6hgtkta5dvqy" path="res://scripts/wave_spawner.gd" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://cc8jaodj0qcat" path="res://scenes/HealPickup.tscn" id="5_lhr70"]
+[ext_resource type="PackedScene" uid="uid://rs7moujro2ic" path="res://scenes/KunaiDamagePickup.tscn" id="6_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://irv8qfy7lxo0" path="res://scenes/KunaiMultiPickup.tscn" id="7_bjd11"]
+[ext_resource type="PackedScene" uid="uid://dp0rcfbk44cdb" path="res://scenes/KunaiPiercePickup.tscn" id="8_qmy6f"]
+[ext_resource type="PackedScene" uid="uid://b8y72s1ap1n64" path="res://scenes/Boss.tscn" id="9_wp0k4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rarhs"]
+texture = ExtResource("3_c01mt")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.8, 8, -4.8, -4.8, 8, -4.8, 8, -8, -8, -8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4.8, -8, -8, 8, -8, 8, -4.8)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4.8, 4.8, -4.8, 4.8, 8, 8, 8, 8, -8, -8, -8)
+3:6/0 = 0
+4:6/0 = 0
+0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, -4.8, -8, -4.8, 8)
+1:7/0 = 0
+2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.8, 8, 4.8, -8, 8, -8, 8, 8)
+3:7/0 = 0
+4:7/0 = 0
+0:8/0 = 0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -4.8, -8, -4.8, -1.5999999, 8, -1.5999999, 8, 8, -8, 8)
+1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -1.5999999, 8, -1.5999999, 8, 8)
+2:8/0 = 0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.5999999, 4.8, -1.5999999, 4.8, -8, 8, -8, 8, 8, -8, 8)
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_q8u5g"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_rarhs")
+
+[node name="Main" type="Node2D"]
+texture_filter = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_q8u5g")
+format = 2
+layer_0/tile_data = PackedInt32Array(131073, 65537, 7, 196609, 65537, 7, 262145, 65537, 7, 327681, 65537, 7, 393217, 65537, 7, 458753, 65537, 7, 524289, 65537, 7, 131074, 65537, 7, 196610, 65537, 7, 262146, 65537, 7, 327682, 65537, 7, 393218, 65537, 7, 458754, 65537, 7, 524290, 65537, 7, 131075, 65537, 7, 196611, 65537, 7, 262147, 65537, 7, 327683, 65537, 7, 393219, 65537, 7, 458755, 65537, 7, 524291, 65537, 7, 131076, 65537, 7, 196612, 65537, 7, 262148, 65537, 7, 327684, 65537, 7, 393220, 65537, 7, 458756, 65537, 7, 524292, 65537, 7, 131077, 65537, 7, 196613, 65537, 7, 262149, 65537, 7, 327685, 65537, 7, 393221, 65537, 7, 458757, 65537, 7, 524293, 65537, 7, 131078, 65537, 7, 196614, 65537, 7, 262150, 65537, 7, 327686, 65537, 7, 393222, 65537, 7, 458758, 65537, 7, 524294, 65537, 7, 131079, 65537, 7, 196615, 65537, 7, 262151, 65537, 7, 327687, 65537, 7, 393223, 65537, 7, 458759, 65537, 7, 524295, 65537, 7, 131080, 65537, 7, 196616, 65537, 7, 262152, 65537, 7, 327688, 65537, 7, 393224, 65537, 7, 458760, 65537, 7, 524296, 65537, 7, 131081, 65537, 7, 196617, 65537, 7, 262153, 65537, 7, 327689, 65537, 7, 393225, 65537, 7, 458761, 65537, 7, 524297, 65537, 7, 131082, 65537, 7, 196618, 65537, 7, 262154, 65537, 7, 327690, 65537, 7, 393226, 65537, 7, 458762, 65537, 7, 524298, 65537, 7, 131083, 65537, 7, 196619, 65537, 7, 262155, 65537, 7, 327691, 65537, 7, 393227, 65537, 7, 458763, 65537, 7, 524299, 65537, 7, 131084, 65537, 7, 196620, 65537, 7, 262156, 65537, 7, 327692, 65537, 7, 393228, 65537, 7, 458764, 65537, 7, 524300, 65537, 7, 327693, 65537, 7, 393229, 65537, 7, 458765, 65537, 7, 524301, 65537, 7, 327694, 65537, 7, 393230, 65537, 7, 458766, 65537, 7, 524302, 65537, 7, 327695, 65537, 7, 393231, 65537, 7, 458767, 65537, 7, 524303, 65537, 7, 327696, 65537, 7, 393232, 65537, 7, 458768, 65537, 7, 524304, 65537, 7, 327697, 131073, 7, 393233, 131073, 7, 458769, 131073, 7, 524305, 131073, 7, 589825, 65537, 8, 589826, 65537, 8, 589827, 65537, 8, 589828, 65537, 8, 589829, 65537, 8, 589830, 65537, 8, 589831, 65537, 8, 589832, 65537, 8, 589833, 65537, 8, 589834, 65537, 8, 589835, 65537, 8, 589836, 65537, 8, 589837, 65537, 8, 589838, 65537, 8, 589839, 65537, 8, 589840, 65537, 8, 131072, 1, 7, 196608, 1, 7, 262144, 1, 7, 327680, 1, 7, 393216, 1, 7, 458752, 1, 7, 524288, 1, 7, 589824, 1, 8, 589841, 131073, 8, 131085, 65537, 7, 196621, 65537, 7, 262157, 65537, 7, 131086, 65537, 7, 196622, 65537, 7, 262158, 65537, 7, 131087, 65537, 7, 196623, 65537, 7, 262159, 65537, 7, 131088, 65537, 7, 196624, 65537, 7, 262160, 65537, 7, 131089, 131073, 7, 196625, 131073, 7, 262161, 131073, 7, 65553, 131073, 6, 65537, 65537, 6, 65538, 65537, 6, 65539, 65537, 6, 65540, 65537, 6, 65541, 65537, 6, 65542, 65537, 6, 65543, 65537, 6, 65544, 65537, 6, 65545, 65537, 6, 65546, 65537, 6, 65547, 65537, 6, 65548, 65537, 6, 65549, 65537, 6, 65550, 65537, 6, 65551, 65537, 6, 65552, 65537, 6, 65536, 1, 6)
+
+[node name="BossAttackTileMap" type="TileMap" parent="."]
+visible = false
+z_index = 1
+texture_filter = 1
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_q8u5g")
+format = 2
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(131073, 65537, 7, 196609, 65537, 7, 262145, 65537, 7, 327681, 65537, 7, 393217, 65537, 7, 458753, 65537, 7, 524289, 65537, 7, 131074, 65537, 7, 196610, 65537, 7, 262146, 65537, 7, 327682, 65537, 7, 393218, 65537, 7, 458754, 65537, 7, 524290, 65537, 7, 131075, 65537, 7, 196611, 65537, 7, 262147, 65537, 7, 327683, 65537, 7, 393219, 65537, 7, 458755, 65537, 7, 524291, 65537, 7, 131076, 65537, 7, 196612, 65537, 7, 262148, 65537, 7, 327684, 65537, 7, 393220, 65537, 7, 458756, 65537, 7, 524292, 65537, 7, 131077, 65537, 7, 196613, 65537, 7, 262149, 65537, 7, 327685, 65537, 7, 393221, 65537, 7, 458757, 65537, 7, 524293, 65537, 7, 131078, 65537, 7, 196614, 65537, 7, 262150, 65537, 7, 327686, 65537, 7, 393222, 65537, 7, 458758, 65537, 7, 524294, 65537, 7, 131079, 65537, 7, 196615, 65537, 7, 262151, 65537, 7, 327687, 65537, 7, 393223, 65537, 7, 458759, 65537, 7, 524295, 65537, 7, 131080, 65537, 7, 196616, 65537, 7, 262152, 65537, 7, 327688, 65537, 7, 393224, 65537, 7, 458760, 65537, 7, 524296, 65537, 7, 131081, 65537, 7, 196617, 65537, 7, 262153, 65537, 7, 327689, 65537, 7, 393225, 65537, 7, 458761, 65537, 7, 524297, 65537, 7, 131082, 65537, 7, 196618, 65537, 7, 262154, 65537, 7, 327690, 65537, 7, 393226, 65537, 7, 458762, 65537, 7, 524298, 65537, 7, 131083, 65537, 7, 196619, 65537, 7, 262155, 65537, 7, 327691, 65537, 7, 393227, 65537, 7, 458763, 65537, 7, 524299, 65537, 7, 131084, 65537, 7, 196620, 65537, 7, 262156, 65537, 7, 327692, 65537, 7, 393228, 65537, 7, 458764, 65537, 7, 524300, 65537, 7, 327693, 65537, 7, 393229, 65537, 7, 458765, 65537, 7, 524301, 65537, 7, 327694, 65537, 7, 393230, 65537, 7, 458766, 65537, 7, 524302, 65537, 7, 327695, 65537, 7, 393231, 65537, 7, 458767, 65537, 7, 524303, 65537, 7, 327696, 65537, 7, 393232, 65537, 7, 458768, 65537, 7, 524304, 65537, 7, 327697, 131073, 7, 393233, 131073, 7, 458769, 131073, 7, 524305, 131073, 7, 589825, 65537, 8, 589826, 65537, 8, 589827, 65537, 8, 589828, 65537, 8, 589829, 65537, 8, 589830, 65537, 8, 589831, 65537, 8, 589832, 65537, 8, 589833, 65537, 8, 589834, 65537, 8, 589835, 65537, 8, 589836, 65537, 8, 589837, 65537, 8, 589838, 65537, 8, 589839, 65537, 8, 589840, 65537, 8, 131072, 1, 7, 196608, 1, 7, 262144, 1, 7, 327680, 1, 7, 393216, 1, 7, 458752, 1, 7, 524288, 1, 7, 589824, 1, 8, 589841, 131073, 8, 131085, 65537, 7, 196621, 65537, 7, 262157, 65537, 7, 131086, 65537, 7, 196622, 65537, 7, 262158, 65537, 7, 131087, 65537, 7, 196623, 65537, 7, 262159, 65537, 7, 131088, 65537, 7, 196624, 65537, 7, 262160, 65537, 7, 131089, 131073, 7, 196625, 131073, 7, 262161, 131073, 7, 65553, 131073, 6, 65537, 65537, 6, 65538, 65537, 6, 65539, 65537, 6, 65540, 65537, 6, 65541, 65537, 6, 65542, 65537, 6, 65543, 65537, 6, 65544, 65537, 6, 65545, 65537, 6, 65546, 65537, 6, 65547, 65537, 6, 65548, 65537, 6, 65549, 65537, 6, 65550, 65537, 6, 65551, 65537, 6, 65552, 65537, 6, 65536, 1, 6)
+
+[node name="WaveSpawner" type="Node2D" parent="."]
+script = ExtResource("4_rarhs")
+enemy_scene = ExtResource("2_rvslj")
+boss_scene = ExtResource("9_wp0k4")
+tilemap_path = NodePath("../TileMap")
+wave_label_path = NodePath("../HUD/WaveLabel")
+world_path = NodePath("../World")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="World" instance=ExtResource("2_0bbpv")]
+position = Vector2(543, 310)
+
+[node name="HealPickup" parent="World" instance=ExtResource("5_lhr70")]
+visible = false
+
+[node name="KunaiDamagePickup" parent="World" instance=ExtResource("6_wp0k4")]
+visible = false
+
+[node name="KunaiMultiPickup" parent="World" instance=ExtResource("7_bjd11")]
+visible = false
+
+[node name="KunaiPiercePickup" parent="World" instance=ExtResource("8_qmy6f")]
+visible = false
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_c01mt")
+score_label_path = NodePath("ScoreLabel")
+
+[node name="WaveLabel" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 8.0
+offset_right = 207.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_vcsgt")
+theme_override_font_sizes/font_size = 35
+text = "WAVE    1"
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 709.0
+offset_right = 1152.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("1_vcsgt")
+theme_override_font_sizes/font_size = 35
+text = "KILLS:    0        BEST:    0"
+
+[node name="Boss" parent="." instance=ExtResource("9_wp0k4")]
+position = Vector2(542, 115)
+max_health = null
+damage = null
+attack_interval = null
+first_attack_delay = null
+warn_time = null
+fire_time = null
+tiles_per_attack = null
+hits_once_per_fire = null
+tick_damage = null
+arena_layer = null
+attack_layer = null
+attack_source_id = null
+attack_atlas_coords = null
+attack_alt_tile = null
